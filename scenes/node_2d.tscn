@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://dgqwap1h8r5t1"]
+[gd_scene load_steps=15 format=4 uid="uid://dgqwap1h8r5t1"]
 
 [ext_resource type="Texture2D" uid="uid://dvsar8iaii6q" path="res://sprites/Dungeon_Tileset.png" id="1_6qldq"]
 [ext_resource type="Texture2D" uid="uid://dn8gnp156l0dd" path="res://sprites/Soldier-Idle.png" id="2_7qcq2"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="3_1jvyo"]
+[ext_resource type="Script" path="res://addons/gesture_recognizer/scripts/ControlGesture.gd" id="4_cpkfg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hykxa"]
 texture = ExtResource("1_6qldq")
@@ -263,6 +264,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_b30g7"]
+radius = 219.94
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -279,3 +283,22 @@ script = ExtResource("3_1jvyo")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+offset = Vector2(600, 300)
+transform = Transform2D(1, 0, 0, 1, 600, 300)
+
+[node name="Gesture" type="Area2D" parent="Player/Camera2D/CanvasLayer"]
+script = ExtResource("4_cpkfg")
+customButton = true
+customButtomUI = "Draw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Camera2D/CanvasLayer/Gesture"]
+shape = SubResource("CircleShape2D_b30g7")
+
+[node name="ProgressBar" type="ProgressBar" parent="Player/Camera2D/CanvasLayer"]
+offset_left = -527.0
+offset_top = -227.0
+offset_right = -240.0
+offset_bottom = -200.0
+step = 1.0
