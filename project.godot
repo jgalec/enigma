@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="enigma"
-run/main_scene="res://scenes/node_2d.tscn"
+run/main_scene="res://scenes/main_game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-turn_queue="*res://scripts/TurnQueue.gd"
+TurnManager="*res://scripts/TurnManager.gd"
 
 [dotnet]
 
