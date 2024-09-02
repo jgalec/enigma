@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://k13ovslm0m0b"]
+
+[ext_resource type="Script" path="res://scripts/custom_classes/Entity.gd" id="1_0urdr"]
+[ext_resource type="Texture2D" uid="uid://el5ygyvsdqnu" path="res://sprites/Orc.png" id="2_ncplu"]
+[ext_resource type="Script" path="res://scripts/state_machines/StateMachine.gd" id="3_aqvg0"]
+[ext_resource type="Script" path="res://scripts/state_machines/EnemyIdle.gd" id="4_ivkp2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhs6e"]
+atlas = ExtResource("2_ncplu")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rnvu"]
+atlas = ExtResource("2_ncplu")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoneh"]
+atlas = ExtResource("2_ncplu")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44rym"]
+atlas = ExtResource("2_ncplu")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1yn3"]
+atlas = ExtResource("2_ncplu")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7wy8"]
+atlas = ExtResource("2_ncplu")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jyujv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhs6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rnvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoneh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44rym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1yn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7wy8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}]
+
+[node name="OrcEnemy" type="Node2D"]
+script = ExtResource("1_0urdr")
+speed = 30
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jyujv")
+animation = &"idle"
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_aqvg0")
+initial_state = NodePath("EnemyIdle")
+
+[node name="EnemyIdle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_ivkp2")
+enemy = NodePath("../..")
