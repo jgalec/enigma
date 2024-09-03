@@ -7,7 +7,6 @@ var current_turn = 0
 func _ready():
 	if initial_turn_entity:
 		entities.append(initial_turn_entity)
-	if entities.size() > 0:
 		entities[current_turn].emit_signal("turn_started")
 
 func get_turn_entity():

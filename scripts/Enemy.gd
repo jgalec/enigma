@@ -1,4 +1,5 @@
 extends Entity
+class_name Enemy
 
 func taking_turn():
 	for i in range(movement):
