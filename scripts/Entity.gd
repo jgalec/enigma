@@ -3,7 +3,7 @@ class_name Entity
 
 @export var max_movement : int = 3
 @export var tilemaplayer : TileMapLayer
-var speed : float = 100.0
+var speed : float = 0.2
 var movement : int
 
 signal turn_started
@@ -35,7 +35,7 @@ func move_to_direction(direction: Vector2) -> bool:
 	if tilemaplayer.get_cell_tile_data(new_cell).get_custom_data("walkable"):
 		# Usar tween para movimiento suave
 		var tween = create_tween()
-		tween.tween_property(self, "position", new_cell_pos, 0.5) # 0.5 segundos para el movimiento
+		tween.tween_property(self, "position", new_cell_pos, speed) # 0.5 segundos para el movimiento
 		movement -= 1
 		return true
 	else:
