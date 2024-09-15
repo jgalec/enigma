@@ -53,5 +53,4 @@ func _on_turn_started():
 
 # Manejo del final del turno
 func _on_turn_ended():
-	if TurnManager.get_turn_entity() == self:
-		TurnManager.next_turn()
+	TurnManager.next_turn()

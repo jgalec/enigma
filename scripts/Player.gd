@@ -2,6 +2,7 @@ extends Entity
 class_name Player
 
 @onready var counter : Label = $"../CanvasLayer/Control/Label"
+@onready var next_turn_button : Button = $"../CanvasLayer/Button"
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -15,6 +16,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func taking_turn():
 	counter.text = "MOVEMENT:"+str(movement)
+	next_turn_button.visible = true
+
+func _on_turn_ended():
+	next_turn_button.visible = false
+	TurnManager.next_turn()
 
 func _on_button_pressed() -> void:
 	get_viewport().set_input_as_handled()
